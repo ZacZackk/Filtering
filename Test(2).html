@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+function Filter() {
+var stringArray = document.getElementById('info').value.split(";");
+var text = "";
+var i;
+for (i = 0; i < stringArray.length; i++) {
+	var a;
+	var compare;
+	a = stringArray[i];
+	if (a.indexOf("04") >= 0 ) {
+		var parts = a.split('=', 2);
+		a = parts[1];
+		if(compare == a) {}
+	else {
+		compare = a;
+		document.getElementById("Numbers").value += a;
+		document.getElementById("Numbers").value += "\n";
+		}
+	} else if(a.indexOf("E=") >= 0 ) {
+		var res = a.replace("E=","");
+		a = res;
+		document.getElementById("Emails").value += a;
+		document.getElementById("Emails").value += "";
+	} else {
+		var res = a.replace("B=","");
+		a = res;
+		document.getElementById("Other").value += a;
+		document.getElementById("Other").value += "\n";
+		}
+	}
+}
+function wipe() {
+Text1.value = "";
+Numbers.value = "";
+Emails.value = "";
+Other.value = "";
+}</script>
+
+<title>Filtering Webpage</title>
+</head>
+<body>
+
+
+Information to Filter:<br> <textarea name="Text1" id="info" cols="40" rows="5"></textarea><br>
+<input type="button" value="Filter" onclick="Filter();"><p>Please only Press Filter once!</p><br><br>
+Filtered Information:<br>
+<textarea name="Text2" id="Numbers" cols="40" rows="5"></textarea>
+<textarea name="Text3" cols="40" id="Emails" rows="5"></textarea>
+<textarea name="Text4" cols="40" id="Other" rows="5"></textarea><br>
+<input type="button" value="Reset" onclick="wipe();"><br><br>
+</body>
+</html>
