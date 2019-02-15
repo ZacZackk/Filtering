@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head><style>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<style>
 * {
   box-sizing: border-box;
 }
@@ -78,6 +80,8 @@ textarea {
   }
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
 window.Myglobal = "global";
 function Filter() {
@@ -141,12 +145,12 @@ for (i = 0; i < stringArray.length; i++) {
 		} else { }
 	}
 	}
-	if(document.getElementById("Numbers").value == '') {alert("Please enter results to filter"); }
+	if(document.getElementById("Numbers").value == '') {toastr.warning("Please enter results to filter"); }
 	else {
 	var copy = document.getElementById("Numbers");
 	copy.select();
 	document.execCommand("copy");
-	alert("Sucess. Mobile numbers copied to clipboard");
+	toastr.success("Sucess. Mobile numbers copied to clipboard");
 	
 	}
 }
@@ -190,7 +194,7 @@ for (i = 0; i < stringArray.length; i++) {
 	
 		
 	}else {
-		alert("fail interupt 1 if"); 
+		toastr.error("fail interupt 1 if"); 
 	 }
 }
 	else if (a.indexOf("interruption 2") >= 0 ) {
@@ -206,7 +210,7 @@ for (i = 0; i < stringArray.length; i++) {
 	
 		
 	}else {
-		alert("fail interupt 1 if"); 
+		toastr.error("fail interupt 1 if"); 
 	 }
 }
 	else if (a.indexOf("interruption 3") >= 0 ) {
@@ -222,7 +226,7 @@ for (i = 0; i < stringArray.length; i++) {
 	
 		
 	}else {
-		alert("fail interupt 1 if"); 
+		toastr.error("fail interupt 1 if"); 
 	 }
 }
 	else if (a.indexOf("interruption 4") >= 0 ) {
@@ -238,7 +242,7 @@ for (i = 0; i < stringArray.length; i++) {
 	
 		
 	}else {
-		alert("fail interupt 1 if"); 
+		toastr.error("fail interupt 1 if"); 
 	 }
 }
 	else if (a.indexOf("interruption 5") >= 0 ) {
@@ -254,7 +258,7 @@ for (i = 0; i < stringArray.length; i++) {
 	
 		
 	}else {
-		alert("fail interupt 1 if"); 
+		toastr.error("fail interupt 1 if"); 
 	 }
 }
 else if(a.indexOf("Work Start") >= 0 ) {
@@ -287,7 +291,7 @@ else if(a.indexOf("Work Start") >= 0 ) {
 			}
 			else{}
 }
-if(document.getElementById("i2f").value == '') {alert("SMS Not Genereated as email data is blank"); }
+if(document.getElementById("i2f").value == '') {toastr.error("SMS Not Genereated as email data is blank"); }
 	else {
 	var smstime = document.getElementById("to1s");
 	if (document.getElementById("to1s").value.indexOf("AEDT") >= 0 ) {
@@ -340,7 +344,7 @@ function WriteToFile() {
 	loc2 = loc2.replace("file:///","");
 	var open = loc2 + "Change%20Notification.html";
 	window.open(open);
-	if (document.getElementById("Emails").value =='') {alert("Please make sure there are emails in the box to create an Email");
+	if (document.getElementById("Emails").value =='') {toastr.error("Please make sure there are emails in the box to create an Email");
 }else {
 	var email = document.getElementById("Emails").value;
 	email = email.replace(/(?:\r\n|\r|\n)/g, ";");
@@ -348,7 +352,7 @@ function WriteToFile() {
   var mlink = document.createElement('a');
   mlink.setAttribute('href', mail);
   mlink.click();
-  alert(to1e);
+  toastr.warning(to1e);
   }
 	}
 
@@ -381,12 +385,12 @@ var stringArray2 = document.getElementById('Other').value.split("	");
 		}
 		
 		if (document.getElementById('Other').value =='' ) {
-	alert("There is no data in the box");
+	toastr.error("There is no correct data in the box");
 	} else {
 		var copy = document.getElementById("Other");
 	copy.select();
 	document.execCommand("copy");
-	alert("Sucess. CRMID numbers copied to clipboard. " + fc + " TAC Services Filtered");	
+	toastr.success("Sucess. CRMID numbers copied to clipboard. " + fc + " TAC Services Filtered");	
 	fc = 0;
 	
 	
@@ -395,15 +399,20 @@ var stringArray2 = document.getElementById('Other').value.split("	");
 </script>
 
 
-
 <title>Filtering Webpage</title>
 </head>
 <body>
 <div class="grid-container">
 	<div class="header">
-		<h2>Outages Filtering Application</h2>
-		<img source="https://www.bendigotelco.com.au/Themes/CorporateWebsiteTheme/Styles/Images/BendigoTelcoSingleLine.png">
+	<div class="column">
+	<img src="https://www.bendigotelco.com.au/Themes/CorporateWebsiteTheme/Styles/Images/BendigoTelco.png">
 	</div>
+	<div class="column">
+		<h3>Outages Filtering Application</h3>
+	</div>
+	</div>
+	</div>
+	
 </div>
 <div class="row">
 <div class="column">
@@ -413,8 +422,8 @@ var stringArray2 = document.getElementById('Other').value.split("	");
 </div>
 <div class="column">
 <text>Paste Contacts Here</text><p>
-<textarea name="Text1" id="info" cols="40" rows="5"></textarea><p>
-<text><small>This button is under the outages email section</small></text>
+<textarea name="Text1" id="info" cols="40" rows="5"></textarea>
+</text>
 </div>
 <div class="column">
 <text>Paste Outages Email Here</text><p>
