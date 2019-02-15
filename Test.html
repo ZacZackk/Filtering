@@ -47,8 +47,11 @@ textarea {
 /* Create four equal columns that floats next to each other */
 .column {
   float: left;
-  width: 25%;
+  width: 33%;
   padding: 10px;
+    -webkit-column-width: 350px;
+     -moz-column-width: 350px;
+          column-width: 350px;
 }
 
 /* Clear floats after the columns */
@@ -78,7 +81,11 @@ textarea {
   }
 }
 </style>
+<script src="http://callummizzi.com.au/toast/toast.js"></script>
 <script>
+function showAToast() {
+	iqwerty.toast.Toast('');
+}
 window.Myglobal = "global";
 function Filter() {
 Numbers.value = "";
@@ -381,7 +388,7 @@ var stringArray2 = document.getElementById('Other').value.split("	");
 		}
 		
 		if (document.getElementById('Other').value =='' ) {
-	alert("There is no data in the box");
+		iqwerty.toast.Toast('There is no data in the box!', options);
 	} else {
 		var copy = document.getElementById("Other");
 	copy.select();
@@ -401,24 +408,27 @@ var stringArray2 = document.getElementById('Other').value.split("	");
 <body>
 <div class="grid-container">
 	<div class="header">
-		<h2>Outages Filtering Application</h2>
-		<img source="https://www.bendigotelco.com.au/Themes/CorporateWebsiteTheme/Styles/Images/BendigoTelcoSingleLine.png">
+			<div class="column">
+		<img style="height:auto; width:auto; max-width:300px; max-height:300px;" src="BendigoTelcoSingleLine.png">
+		</div>
+	<div class="column">
+		<h3>Outages Filtering Application</h3>
+		</div>
 	</div>
 </div>
 <div class="row">
 <div class="column">
 <text>Unfiltered CMRID Here</text><p>
-<textarea name="Text3" id="crmid" cols="40" rows="5"></textarea><p>
-<input type="button" value="Filter and Copy CRMID" onclick="CRMID();">
+<textarea name="Text3" id="crmid" cols="30" rows="5"></textarea><p>
+<input type="button" value="Filter and Copy CRMID" onclick="showAToast;" onclick="CRMID();">
 </div>
 <div class="column">
 <text>Paste Contacts Here</text><p>
-<textarea name="Text1" id="info" cols="40" rows="5"></textarea><p>
-<text><small>This button is under the outages email section</small></text>
+<textarea name="Text1" id="info" cols="30" rows="5"></textarea>
 </div>
 <div class="column">
 <text>Paste Outages Email Here</text><p>
-<textarea name="Text1" id="i2f" cols="40" rows="5"></textarea><p>
+<textarea name="Text1" id="i2f" cols="30" rows="5"></textarea><p>
 <input type="button" align="right" value="Filter and Copy Contacts and Outages" onclick="Filter(); + Filter2();">
 </div> 
 </div>
@@ -429,15 +439,15 @@ ChangeID: <input type="Change ID" id="chid" name="Outage 1 Start:">
 <div class="row">
 <div class="column">
 <text>Mobile</text><p>
-<textarea name="Text2" id="Numbers" cols="40" rows="5"></textarea>
+<textarea name="Text2" id="Numbers" cols="30" rows="5"></textarea>
 </div>
 <div class="column">
 <text>Emails</text><p>
-<textarea name="Text3" id="Emails" cols="40" rows="5"></textarea>
+<textarea name="Text3" id="Emails" cols="30" rows="5"></textarea>
 </div>
 <div class="column">
 <text>Other</text><p>
-<textarea name="Text4" id="Other" cols="40" rows="5"></textarea>
+<textarea name="Text4" id="Other" cols="30" rows="5"></textarea>
 </div>
 </div>
 <div class="row">
@@ -478,7 +488,7 @@ Outage 5 End: <input type="text" id="o5e" name="Outage 1 End:">
 </div>
 <div class="column">
 <text>SMS Template</text><p>
-<textarea name="Text5" id="SMS" cols="40" rows="5"></textarea>
+<textarea name="Text5" id="SMS" cols="30" rows="5"></textarea>
 </div>
 </div>
 </body>
