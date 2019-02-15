@@ -71,8 +71,6 @@ textarea {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
-window.Myglobal = "global";
-
 function Filter() {
     Numbers.value = "";
     Emails.value = "";
@@ -131,7 +129,7 @@ function Filter() {
         }
     }
     if (document.getElementById("Numbers").value == '') {
-        toastr.warning("Please enter results to filter");
+        toastr.warning("Please enter results to filter - Jonathan what does this mean?");
     } else {
         var copy = document.getElementById("Numbers");
         copy.select();
