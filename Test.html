@@ -1,6 +1,83 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color:#f1f1f1;
+}
+
+textarea {
+  resize: none;
+}
+
+/* Style the header */
+.header {
+  grid-area: header;
+  background-color: #f1f1f1;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+}
+
+/* The grid container */
+.grid-container {
+  display: grid;
+  grid-template-areas: 
+    'header header header header header header' 
+    'left left middle middle right right' 
+    'footer footer footer footer footer footer';
+	grid-column-gap: 10px;
+} 
+
+.left,
+.middle,
+.right {
+  padding: 10px;
+  height: 300px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+.footer {
+  grid-area: footer;
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  .grid-container  {
+    grid-template-areas: 
+      'header header header header header header' 
+      'left left left left left left' 
+      'middle middle middle middle middle middle' 
+      'right right right right right right' 
+      'footer footer footer footer footer footer';
+  }
+}
+</style>
 <script>
 window.Myglobal = "global";
 function Filter() {
@@ -322,46 +399,87 @@ var stringArray2 = document.getElementById('Other').value.split("	");
 <title>Filtering Webpage</title>
 </head>
 <body>
-
-
-<pre class="tab">Unfiltered CRMID Here				Paste Contacts Here 				Paste Outage Email Here:</pre> 
-<textarea name="Text3" id="crmid" cols="40" rows="5"></textarea> 
-<textarea name="Text1" id="info" cols="40" rows="5"></textarea> 
-<textarea name="Text1" id="i2f" cols="40" rows="5"></textarea><br>
-Press me once ready to filter:<input type="button" value="Filter and Copy CRMID" onclick="CRMID();"><input type="button" value="Filter and Copy Contacts and Outages" onclick="Filter(); + Filter2();"><br><br>
-Filtered Information:<br><br>
+<div class="grid-container">
+	<div class="header">
+		<h2>Outages Filtering Application</h2>
+		<img source="https://www.bendigotelco.com.au/Themes/CorporateWebsiteTheme/Styles/Images/BendigoTelcoSingleLine.png">
+	</div>
+</div>
+<div class="row">
+<div class="column">
+<text>Unfiltered CMRID Here</text><p>
+<textarea name="Text3" id="crmid" cols="40" rows="5"></textarea><p>
+<input type="button" value="Filter and Copy CRMID" onclick="CRMID();">
+</div>
+<div class="column">
+<text>Paste Contacts Here</text><p>
+<textarea name="Text1" id="info" cols="40" rows="5"></textarea><p>
+<text><small>This button is under the outages email section</small></text>
+</div>
+<div class="column">
+<text>Paste Outages Email Here</text><p>
+<textarea name="Text1" id="i2f" cols="40" rows="5"></textarea><p>
+<input type="button" align="right" value="Filter and Copy Contacts and Outages" onclick="Filter(); + Filter2();">
+</div> 
+</div>
+<div class="row">
+<text><big>Filtered Information:</big></text><br><br>
 ChangeID: <input type="Change ID" id="chid" name="Outage 1 Start:">
-<pre class="tab"> Mobile						Email					Other						SMS</pre>
+</div>
+<div class="row">
+<div class="column">
+<text>Mobile</text><p>
 <textarea name="Text2" id="Numbers" cols="40" rows="5"></textarea>
-<textarea name="Text3" cols="40" id="Emails" rows="5"></textarea>
-<textarea name="Text4" cols="40" id="Other" rows="5"></textarea>
-<textarea name="Text5" cols="40" id="SMS" rows="5"></textarea>
-<br>
+</div>
+<div class="column">
+<text>Emails</text><p>
+<textarea name="Text3" id="Emails" cols="40" rows="5"></textarea>
+</div>
+<div class="column">
+<text>Other</text><p>
+<textarea name="Text4" id="Other" cols="40" rows="5"></textarea>
+</div>
+</div>
+<div class="row">
 <input type="button" value="Reset" onclick="wipe();"><br><br>
-<br>
-
-Outage Times:<br><br>
+</div>
+<div class="row">
+<div class="column">
+Outage Start Times:<br><br>
 Total Outage Start: <input type="text" id="to1s" name="Outage 1 Start:">
-Total Outage End: <input type="text" id="to1e" name="Outage 1 End:">
-Total Outage Duration Duration: <input type="text" id="o1t" name="Outage 1 End:">
-<br><br>
+<br><br><br>
 Outage 1 Start: <input type="text" id="o1s" name="Outage 1 Start:">
-Outage 1 End: <input type="text" id="o1e" name="Outage 1 End:">
 <br><br>
 Outage 2 Start: <input type="text" id="o2s" name="Outage 1 Start:">
-Outage 2 End: <input type="text" id="o2e" name="Outage 1 End:">
 <br><br>
 Outage 3 Start: <input type="text" id="o3s" name="Outage 1 Start:">
-Outage 3 End: <input type="text" id="o3e" name="Outage 1 End:">
 <br><br>
 Outage 4 Start: <input type="text" id="o4s" name="Outage 1 Start:">
-Outage 4 End: <input type="text" id="o4e" name="Outage 1 End:">
 <br><br>
 Outage 5 Start: <input type="text" id="o5s" name="Outage 1 Start:">
-Outage 5 End: <input type="text" id="o5e" name="Outage 1 End:">
 <br><br>
 
 <br><input type="button" value="Reset" onclick="wipe();">
 <input type="button" value="Create Email" onclick="WriteToFile();"><br><br>
+</div>
+<div class="column">
+Outage End Times:<br><br>
+Total Outage End: <input type="text" id="to1e" name="Outage 1 End:"><br>
+Total Outage Duration: <input type="text" id="o1t" name="Outage 1 End:"><br><br>
+Outage 1 End: <input type="text" id="o1e" name="Outage 1 End:">
+<br><br>
+Outage 2 End: <input type="text" id="o2e" name="Outage 1 End:">
+<br><br>
+Outage 3 End: <input type="text" id="o3e" name="Outage 1 End:">
+<br><br>
+Outage 4 End: <input type="text" id="o4e" name="Outage 1 End:">
+<br><br>
+Outage 5 End: <input type="text" id="o5e" name="Outage 1 End:">
+</div>
+<div class="column">
+<text>SMS Template</text><p>
+<textarea name="Text5" id="SMS" cols="40" rows="5"></textarea>
+</div>
+</div>
 </body>
 </html>
