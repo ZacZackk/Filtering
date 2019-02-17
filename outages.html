@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<link rel="stylesheet" href="http://callummizzi.com.au/buttons/buttons2.css">
+<link rel="stylesheet" href="http://callummizzi.com.au/buttons/rowsetc.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<style>
+/* sizing issues */
+input, textarea, select, button {
+  width : 220px;
+  margin: 0;
+	font-family: 'Roboto', sans-serif;
+	vertical-align: top;
+
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+/* body font */
+body {
+	font-family: 'Roboto', sans-serif;
+}
+/* toast font */
+toastr.options {
+	font-family: 'Roboto', sans-serif;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+//beginning of sort
+function Filter() {
+    Numbers.value = "";
+    Emails.value = "";
+    Other.value = "";
+    chid.value = "";
+    var stringArray = document.getElementById('info').value.split(";");
+    var text = "";
+    var i;
+    for (i = 0; i < stringArray.length; i++) {
+        var a;
+        var compare;
+        var chaid;
+        chaid = stringArray[i];
+        a = stringArray[i];
+        if (a.indexOf("Secondary") >= 0) {} else {
+            if (a.indexOf("04") >= 0) {
+                var parts = a.split('=', 2);
+                a = parts[1];
+                if (compare == a) {} else {
+                    compare = a;
+                    if (a.indexOf("@") >= 0) {
+                        document.getElementById("Emails").value += a;
+                        document.getElementById("Emails").value += "\n";
+                    } else {
+                        document.getElementById("Numbers").value += a;
+                        document.getElementById("Numbers").value += "\n";
+                    }
+                }
+            } else if (a.indexOf("E=") >= 0) {
+                var stringRes = a.split("E=");
+                var cpre = stringRes[1];
+                for (te = 0; te < stringRes.length; te++) {
+                    if (stringRes[te] == cpre) {} else {
+                        document.getElementById("Emails").value += stringRes[1];
+                        document.getElementById("Emails").value += "\n";
+                    }
+                }
+            } else {
+                var res = a.replace("B=", "");
+                a = res;
+                document.getElementById("Other").value += a;
+                document.getElementById("Other").value += "\n";
+            }
+            if (chaid.indexOf("Change C") >= 0) {
+                var info = chaid;
+                var array2 = info.split('\n');
+                for (te2 = 0; te2 < array2.length; te2++) {
+                    if (array2[te2].indexOf("Change C") >= 0) {
+                        var result = array2[te2];
+                        result = result.replace("Change ", "");
+                        document.getElementById("chid").value += result;
+                        Myglobal = result;
+                    } else {}
+                }
+            } else {}
+        }
+    }
+    if (document.getElementById("Numbers").value == '') {
+        toastr.warning("Please enter results to filter - Jonathan what is this alert for?");
+    } else {
+        var copy = document.getElementById("Numbers");
+        copy.select();
+        document.execCommand("copy");
+        toastr.success("Sucess. Mobile numbers copied to clipboard");
+    }
+}
+//reset information
+function wipe() {
+    info.value = "";
+    Numbers.value = "";
+    Emails.value = "";
+    Other.value = "";
+    i2f.value = "";
+		toastr.success("Sucessfully reset data.")
+}
+//gets values for the outage timings
+function Filter2() {
+    to1s.value = "";
+    to1e.value = "";
+    o1s.value = "";
+    o1e.value = "";
+    o1t.value = "";
+    o2s.value = "";
+    o2e.value = "";
+    o3s.value = "";
+    o3e.value = "";
+    o4s.value = "";
+    o4e.value = "";
+    o5s.value = "";
+    o5e.value = "";
+    SMS.value = "";
+    var stringArray = document.getElementById('i2f').value.split('\n');
+    var text = "";
+    var i;
+    for (i = 0; i < stringArray.length; i++) {
+        var a = stringArray[i];
+        if (a.indexOf("interruption 1") >= 0) {
+            var start = i + 1;
+            var end = i + 2;
+            a = stringArray[start];
+            b = stringArray[end];
+            if (a.indexOf("Start: ") >= 0) {
+                var start2 = a.replace("Start: ", "");
+                document.getElementById("o1s").value += start2;
+                var start3 = b.replace("End: ", "");
+                document.getElementById("o1e").value += start3;
+            } else {
+                toastr.error("fail interupt 1 if");
+            }
+        } else if (a.indexOf("interruption 2") >= 0) {
+            var start = i + 1;
+            var end = i + 2;
+            a = stringArray[start];
+            b = stringArray[end];
+            if (a.indexOf("Start: ") >= 0) {
+                var start2 = a.replace("Start: ", "");
+                document.getElementById("o2s").value += start2;
+                var start3 = b.replace("End: ", "");
+                document.getElementById("o2e").value += start3;
+            } else {
+                toastr.error("fail interupt 1 if");
+            }
+        } else if (a.indexOf("interruption 3") >= 0) {
+            var start = i + 1;
+            var end = i + 2;
+            a = stringArray[start];
+            b = stringArray[end];
+            if (a.indexOf("Start: ") >= 0) {
+                var start2 = a.replace("Start: ", "");
+                document.getElementById("o3s").value += start2;
+                var start3 = b.replace("End: ", "");
+                document.getElementById("o3e").value += start3;
+            } else {
+                toastr.error("fail interupt 1 if");
+            }
+        } else if (a.indexOf("interruption 4") >= 0) {
+            var start = i + 1;
+            var end = i + 2;
+            a = stringArray[start];
+            b = stringArray[end];
+            if (a.indexOf("Start: ") >= 0) {
+                var start2 = a.replace("Start: ", "");
+                document.getElementById("o4s").value += start2;
+                var start3 = b.replace("End: ", "");
+                document.getElementById("o4e").value += start3;
+            } else {
+                toastr.error("fail interupt 1 if");
+            }
+        } else if (a.indexOf("interruption 5") >= 0) {
+            var start = i + 1;
+            var end = i + 2;
+            a = stringArray[start];
+            b = stringArray[end];
+            if (a.indexOf("Start: ") >= 0) {
+                var start2 = a.replace("Start: ", "");
+                document.getElementById("o5s").value += start2;
+                var start3 = b.replace("End: ", "");
+                document.getElementById("o5e").value += start3;
+            } else {
+                toastr.error("fail interupt 1 if");
+            }
+        } else if (a.indexOf("Work Start") >= 0) {
+            var start = i;
+            var end = i + 1;
+            var time = i + 3;
+            a = stringArray[start];
+            b = stringArray[end];
+            c = stringArray[time];
+            var start2 = a.replace("Work Start: ", "");
+            document.getElementById("to1s").value += start2;
+            var start3 = b.replace("Work End: ", "");
+            document.getElementById("to1e").value += start3;
+            var start4 = c.replace("Outage Duration: ", "");
+            document.getElementById("o1t").value += start4;
+        } else if (a.indexOf("Change start") >= 0) {
+            var start = i;
+            var end = i + 1;
+            var time = i + 2;
+            a = stringArray[start];
+            b = stringArray[end];
+            c = stringArray[time];
+            var start2 = a.replace("Change start: ", "");
+            document.getElementById("to1s").value += start2;
+            var start3 = b.replace("Change end: ", "");
+            document.getElementById("to1e").value += start3;
+            var start4 = c.replace("Change duration: ", "");
+            document.getElementById("o1t").value += start4;
+        } else {}
+    }
+    if (document.getElementById("i2f").value == '') {
+        toastr.error("SMS Not Genereated as email data is blank");
+    } else {
+        var smstime = document.getElementById("to1s");
+        if (document.getElementById("to1s").value.indexOf("AEDT") >= 0) {
+            var temp = document.getElementById("to1s").value;
+            var temp2 = document.getElementById("to1e").value;
+            temp = temp.replace("AEDT", "");
+            temp2 = temp2.replace("AEDT", "");
+            document.getElementById("to1s").value = temp;
+            document.getElementById("to1e").value = temp2;
+            document.getElementById("SMS").value += Myglobal + " NBN Network Maintenance" + '\n' + "You may experience intermittent interruptions to your service during the following period:" + document.getElementById("to1s").value + "-" + document.getElementById("to1e").value;
+        } else {
+            document.getElementById("SMS").value += Myglobal + " NBN Network Maintenance" + '\n' + "You may experience intermittent interruptions to your service during the following period:" + document.getElementById("to1s").value + "-" + document.getElementById("to1e").value;
+        }
+    }
+}
+//creates the email template with populated information
+function WriteToFile() {
+    var o1s = document.getElementById('o1s').value;
+    var o1e = document.getElementById('o1e').value;
+    var o1t = document.getElementById('o1t').value;
+    var o2s = document.getElementById('o2s').value;
+    var o2e = document.getElementById('o2e').value;
+    var o3s = document.getElementById('o3s').value;
+    var o3e = document.getElementById('o3e').value;
+    var o4s = document.getElementById('o4s').value;
+    var o4e = document.getElementById('o4e').value;
+    var o5s = document.getElementById('o5s').value;
+    var o5e = document.getElementById('o5e').value;
+    var chid = document.getElementById('chid').value;
+    var to1s = document.getElementById('to1s').value;
+    var to1e = document.getElementById('to1e').value;
+    localStorage.setItem("o1s", o1s);
+    localStorage.setItem("o1e", o1e);
+    localStorage.setItem("o1t", o1t);
+    localStorage.setItem("o2s", o2s);
+    localStorage.setItem("o2e", o2e);
+    localStorage.setItem("o3s", o3s);
+    localStorage.setItem("o3e", o3e);
+    localStorage.setItem("o4s", o4s);
+    localStorage.setItem("o4e", o4e);
+    localStorage.setItem("o5s", o5s);
+    localStorage.setItem("o5e", o5e);
+    localStorage.setItem("to1s", to1s);
+    localStorage.setItem("to1e", to1e);
+    localStorage.setItem("chid", chid);
+    var loc = window.location;
+    var loc2 = String(loc);
+    loc2 = loc2.replace("outages.html", "");
+    loc2 = loc2.replace("file:///", "");
+    var open = loc2 + "Change%20Notification.html";
+    window.open(open);
+    if (document.getElementById("Emails").value == '') {
+        toastr.error("Please make sure there are emails in the box to create an Email");
+    } else {
+        var email = document.getElementById("Emails").value;
+        email = email.replace(/(?:\r\n|\r|\n)/g, ";");
+        var mail = "mailto:?bcc=" + email + "&subject=Outage Notification";
+        var mlink = document.createElement('a');
+        mlink.setAttribute('href', mail);
+        mlink.click();
+        toastr.warning(to1e);
+    }
+}
+//sorts the CRMID from input
+function CRMID() {
+    Other.value = "";
+    var stringArray = document.getElementById('crmid').value.split('\n');
+    var text = "";
+    var i;
+    var j;
+    var fc = 0;
+    for (i = 0; i < stringArray.length; i++) {
+        var a = stringArray[i];
+        if (a.indexOf("NBNCo") >= 0) {
+            var check = i + 5;
+            if (stringArray[check].indexOf("TAC Support") >= 0) {
+                fc = fc + 1;
+            } else {
+                document.getElementById('Other').value += a;
+            }
+        } else {}
+    }
+    var stringArray2 = document.getElementById('Other').value.split("	");
+    Other.value = "";
+    for (j = 0; j < stringArray2.length; j++) {
+        var b = stringArray2[j];
+        k = j - 1;
+        if (b.indexOf("NBNCo") >= 0) {
+            b = stringArray2[k];
+            document.getElementById('Other').value += b;
+            document.getElementById("Other").value += "\n";
+        } else {}
+    }
+    if (document.getElementById('Other').value == '') {
+        toastr.error("There is no correct data in the box");
+    } else {
+        var copy = document.getElementById("Other");
+        copy.select();
+        document.execCommand("copy");
+        toastr.success("Sucess. CRMID numbers copied to clipboard. " + fc + " TAC Services Filtered");
+        fc = 0;
+    }
+}
+</script>
+<title>Outages Filter</title>
+</head>
+<body>
+	<div class="grid-container">
+		<div class="header">
+			<div class="column"><img src="https://www.bendigotelco.com.au/Themes/CorporateWebsiteTheme/Styles/Images/BendigoTelcoSingleLine.png">
+			</div>
+			<div class="column">
+				<h4>Outages Filter Application</h4>
+			</div>
+		</div>
+	</div>
+	<!-- beginning of all the boxes-->
+	<div class="row">
+		<div class="column">
+			<!-- what goes here? should explain it a bit better for normal users -->
+			Paste Bulk Supplier Search Results Here
+			<p>
+			<textarea cols="40" id="crmid" name="Text3" rows="5"></textarea>
+		</p>
+			<p>
+			</p>
+		</div>
+		<div class="column">
+			<!-- what goes here? should explain it a bit better for normal users -->
+			Paste Contact Information Details Here
+			<p>
+			<textarea cols="40" id="info" name="Text1" rows="5"></textarea> </p>
+		</div>
+		<div class="column">
+			<!-- what goes here? should explain it a bit better for normal users -->
+			Paste Outages Email Information Here
+			<p>
+			<textarea cols="40" id="i2f" name="Text1" rows="5"></textarea>
+		</p><br>
+			</p>
+		</div>
+	</div>
+	<!-- first set of buttons -->
+	<div class="row">
+		<div class="column">
+			<p><input align="left" class="btn-gradient blue mini" onclick="CRMID();" type="button" value="Filter and Copy CRMID">
+		</p>
+	</div>
+	<div class="column">
+		<!-- intentionally left blank for now-->
+	</div>
+	<div class="column">
+		  <p><input align="right" class="btn-gradient blue mini" onclick="Filter(); + Filter2();" type="button" value="Filter and Copy Contacts and Outages">
+		</p>
+	</div>
+</div>
+<!-- pretty self explanatory - the filter text and the change ID-->
+	<div class="row">
+		<div class="column">
+		<big><big>Filtered Information:</big></big><br>
+		<br>
+		ChangeID: <input id="chid" name="Outage 1 Start:" type="change id">
+	</div>
+	</div>
+	<!-- second set of text boxes -->
+	<div class="row">
+		<div class="column">
+			Mobile Numbers
+			<p>
+			<textarea cols="40" id="Numbers" name="Text2" rows="5"></textarea>
+			</p>
+		</div>
+		<div class="column">
+			Email Adresses
+			<p>
+			<textarea cols="40" id="Emails" name="Text3" rows="5"></textarea>
+			</p>
+		</div>
+		<div class="column">
+			Other Information
+			<p>
+			<textarea cols="40" id="Other" name="Text4" rows="5"></textarea>
+			</p>
+		</div>
+	</div>
+	<!-- the reset button-->
+	<div class="row">
+		<div class="column">
+		<input class="btn-gradient blue mini" onclick="wipe();" type="button" value="Reset">
+		<br>
+	</div>
+	</div>
+	<!-- beginning of the outage times list and I also think the sms template? Basically this is for templates -->
+	<div class="row">
+		<div class="column">
+			Outage Start Times:<br>
+			<br>
+			Total Outage Start: <input id="to1s" name="Outage 1 Start:" type="text"><br>
+			<br>
+			<br>
+			Outage 1 Start: <input id="o1s" name="Outage 1 Start:" type="text"><br>
+			<br>
+			Outage 2 Start: <input id="o2s" name="Outage 1 Start:" type="text"><br>
+			<br>
+			Outage 3 Start: <input id="o3s" name="Outage 1 Start:" type="text"><br>
+			<br>
+			Outage 4 Start: <input id="o4s" name="Outage 1 Start:" type="text"><br>
+			<br>
+			Outage 5 Start: <input id="o5s" name="Outage 1 Start:" type="text"><br>
+			<br>
+			<br>
+			<input class="btn-gradient blue mini" onclick="WriteToFile();" type="button" value="Create Email"><br>
+			<br>
+		</div>
+		<div class="column">
+			Outage End Times:<br>
+			<br>
+			Total Outage End: <input id="to1e" name="Outage 1 End:" type="text"><br>
+			Total Outage Duration: <input id="o1t" name="Outage 1 End:" type="text"><br>
+			<br>
+			Outage 1 End: <input id="o1e" name="Outage 1 End:" type="text"><br>
+			<br>
+			Outage 2 End: <input id="o2e" name="Outage 1 End:" type="text"><br>
+			<br>
+			Outage 3 End: <input id="o3e" name="Outage 1 End:" type="text"><br>
+			<br>
+			Outage 4 End: <input id="o4e" name="Outage 1 End:" type="text"><br>
+			<br>
+			Outage 5 End: <input id="o5e" name="Outage 1 End:" type="text">
+		</div>
+		<!-- yeah it included the SMS template as well -->
+		<div class="column">
+			SMS Template
+			<p>
+			<textarea cols="40" id="SMS" name="Text5" rows="5"></textarea>
+			</p>
+		</div>
+	</div>
+</body>
+<!-- gonna leave this commented out. If you see this, stop picking on the spaghetti code.
+<footer>
+	<div class="footer">
+	<small>Created 2019 by Junklyn and ZacZackk</small>
+</div>
+</footer> -->
+</html>
