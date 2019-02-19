@@ -2,19 +2,19 @@
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 <link rel="stylesheet" href="http://callummizzi.com.au/buttons/buttons2.css">
-<link rel="stylesheet" href="http://callummizzi.com.au/buttons/rowsetc.css">
+<link rel="stylesheet" href="http://callummizzi.com.au/buttons/rowsetc2.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <style>
 /* sizing issues */
-input, textarea, select, button {
-  width : 220px;
+* input, textarea, select, button, column, text {
+  -webkit-box-sizing: border-box: inset 2px 2px 2px 0px #dddddd;
+  -moz-box-sizing: border-box: inset 2px 2px 2px 0px #dddddd;
+  box-sizing: border-box: inset 2px 2px 2px 0px #dddddd;
+  width : 230px;
+  resize: none;
   margin: 0;
 	font-family: 'Roboto', sans-serif;
 	vertical-align: top;
-
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
 }
 /* body font */
 body {
@@ -87,7 +87,7 @@ function Filter() {
         }
     }
     if (document.getElementById("Numbers").value == '') {
-        toastr.warning("Please enter results to filter - Jonathan what is this alert for?");
+        toastr.warning("Please ensure you have already filtered Bulk Supplier Results");
     } else {
         var copy = document.getElementById("Numbers");
         copy.select();
@@ -329,37 +329,42 @@ function CRMID() {
 <body>
 	<div class="grid-container">
 		<div class="header">
-			<div class="column"><img src="https://www.bendigotelco.com.au/Themes/CorporateWebsiteTheme/Styles/Images/BendigoTelcoSingleLine.png">
+			<div class="column">
+			<img src="https://www.bendigotelco.com.au/Themes/CorporateWebsiteTheme/Styles/Images/BendigoTelcoSingleLine.png">
 			</div>
 			<div class="column">
 				<h4>Outages Filter Application</h4>
 			</div>
 		</div>
 	</div>
-	<!-- beginning of all the boxes-->
+	<!-- beginning of the first headings -->
 	<div class="row">
 		<div class="column">
 			<!-- what goes here? should explain it a bit better for normal users -->
 			Paste Bulk Supplier Search Results Here
-			<p>
-			<textarea cols="40" id="crmid" name="Text3" rows="5"></textarea>
-		</p>
-			<p>
-			</p>
 		</div>
 		<div class="column">
 			<!-- what goes here? should explain it a bit better for normal users -->
 			Paste Contact Information Details Here
-			<p>
-			<textarea cols="40" id="info" name="Text1" rows="5"></textarea> </p>
 		</div>
 		<div class="column">
 			<!-- what goes here? should explain it a bit better for normal users -->
 			Paste Outages Email Information Here
-			<p>
+		</div>
+	</div>
+	<!-- The actual text boxes -->
+	<div class="row">
+		<div class="column">
+			<!-- bulk supplier text box -->
+			<textarea cols="40" id="crmid" name="Text3" rows="5"></textarea>
+		</div>
+		<div class="column">
+			<!-- contact information box -->
+			<textarea cols="40" id="info" name="Text1" rows="5"></textarea>
+		</div>
+		<div class="column">
+			<!-- outages email text box -->
 			<textarea cols="40" id="i2f" name="Text1" rows="5"></textarea>
-		</p><br>
-			</p>
 		</div>
 	</div>
 	<!-- first set of buttons -->
@@ -384,25 +389,28 @@ function CRMID() {
 		ChangeID: <input id="chid" name="Outage 1 Start:" type="change id">
 	</div>
 	</div>
-	<!-- second set of text boxes -->
+	<!-- second set of text box HEADINGS -->
 	<div class="row">
 		<div class="column">
 			Mobile Numbers
-			<p>
-			<textarea cols="40" id="Numbers" name="Text2" rows="5"></textarea>
-			</p>
 		</div>
 		<div class="column">
-			Email Adresses
-			<p>
-			<textarea cols="40" id="Emails" name="Text3" rows="5"></textarea>
-			</p>
+			Email Addresses
 		</div>
 		<div class="column">
 			Other Information
-			<p>
+		</div>
+	</div>
+	<!-- second set of text boxes -->
+	<div class="row">
+		<div class="column">
+			<textarea cols="40" id="Numbers" name="Text2" rows="5"></textarea>
+		</div>
+		<div class="column">
+			<textarea cols="40" id="Emails" name="Text3" rows="5"></textarea>
+		</div>
+		<div class="column">
 			<textarea cols="40" id="Other" name="Text4" rows="5"></textarea>
-			</p>
 		</div>
 	</div>
 	<!-- the reset button-->
@@ -412,12 +420,12 @@ function CRMID() {
 		<br>
 	</div>
 	</div>
-	<!-- beginning of the outage times list and I also think the sms template? Basically this is for templates -->
+	<!-- beginning of the outage times list and I also think the SMS template? Basically this is for templates -->
 	<div class="row">
 		<div class="column">
 			Outage Start Times:<br>
 			<br>
-			Total Outage Start: <input id="to1s" name="Outage 1 Start:" type="text"><br>
+			Total Outage Start:<input id="to1s" name="Outage 1 Start:" type="text"><br>
 			<br>
 			<br>
 			Outage 1 Start: <input id="o1s" name="Outage 1 Start:" type="text"><br>
