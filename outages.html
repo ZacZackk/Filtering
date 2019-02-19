@@ -283,7 +283,7 @@ function WriteToFile() {
         toastr.warning(to1e);
     }
 }
-//sorts the CRMID from input
+//sorts the CRMID form input
 function CRMID() {
     Other.value = "";
     var stringArray = document.getElementById('crmid').value.split('\n');
@@ -327,13 +327,16 @@ function CRMID() {
 <title>Outages Filter</title>
 </head>
 <body>
+	<!-- header section with logo and name -->
 	<div class="grid-container">
 		<div class="header">
+			<div class="row">
 			<div class="column">
 			<img src="https://www.bendigotelco.com.au/Themes/CorporateWebsiteTheme/Styles/Images/BendigoTelcoSingleLine.png">
 			</div>
 			<div class="column">
-				<h4>Outages Filter Application</h4>
+				<h4>Outages Filter Application</h4><p><font color="red" align="left"><small><small>Please only use in Google Chrome.</small></small></font></p>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -380,8 +383,8 @@ function CRMID() {
 		  <p><input align="right" class="btn-gradient blue mini" onclick="Filter(); + Filter2();" type="button" value="Filter and Copy Contacts and Outages">
 		</p>
 	</div>
-</div>
-<!-- pretty self explanatory - the filter text and the change ID-->
+	</div>
+	<!-- pretty self explanatory - the filter text and the change ID-->
 	<div class="row">
 		<div class="column">
 		<big><big>Filtered Information:</big></big><br>
